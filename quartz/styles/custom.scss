@@ -1,0 +1,75 @@
+@use "./variables.scss" as *;
+
+// ============================================================================
+// Paper Notes — 论文阅读笔记样式
+// 作用域：frontmatter 带 cssclasses: [paper] 的笔记页
+// ============================================================================
+
+article.paper {
+  // 论文元信息面板：让默认灰色 key 列更易读，URL 自动链接（由 note-properties 渲染）
+  .note-properties {
+    background: var(--light);
+    border: 1px solid var(--lightgray);
+    border-radius: 8px;
+  }
+
+  .note-properties .note-properties-key {
+    font-family: var(--codeFont);
+    font-size: 0.8rem;
+    color: var(--gray);
+  }
+
+  .note-properties .note-properties-value a {
+    word-break: break-all;
+  }
+
+  // 一句话总结：置顶 abstract callout
+  > div > .callout[data-callout="abstract"] {
+    margin-top: 0.25rem;
+    border-left: 4px solid var(--secondary);
+    background: color-mix(in srgb, var(--highlight) 60%, transparent);
+  }
+
+  // 固定章节标题：加左侧色条，形成统一的“论文笔记”视觉节奏
+  h2 {
+    border-left: 3px solid var(--secondary);
+    padding-left: 0.6rem;
+    margin-top: 2.2rem;
+  }
+
+  h3 {
+    margin-top: 1.6rem;
+  }
+
+  // 关键结果表：与 .table-container 一致，但首列（任务名）固定宽度更易扫读
+  .table-container > table {
+    th:first-child {
+      min-width: 110px;
+    }
+  }
+
+  // 页内代码块（bibtex 等）：略收敛
+  pre {
+    font-size: 0.8rem;
+  }
+}
+
+// 首页（frontmatter 带 cssclasses: [index]）
+article.index {
+  // 内嵌 Bases 表格：让首列「论文」链接更突出
+  .bases-table a.internal {
+    color: var(--dark);
+    background: transparent;
+    padding: 0;
+    font-weight: $semiBoldWeight;
+
+    &:hover {
+      color: var(--secondary);
+    }
+  }
+
+  .bases-table td,
+  .bases-table th {
+    white-space: normal;
+  }
+}
