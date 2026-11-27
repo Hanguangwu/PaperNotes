@@ -1,0 +1,59 @@
+filters:
+  and:
+    - 'file.hasTag("papers")'
+    - 'file.hasProperty("paper_id")'
+properties:
+  title:
+    displayName: 论文
+  alias:
+    displayName: 中文标题
+  authors:
+    displayName: 作者
+  institution:
+    displayName: 机构
+  venue:
+    displayName: 发表渠道
+  year:
+    displayName: 年份
+  arxiv:
+    displayName: arXiv
+  paper_url:
+    displayName: 链接
+  code:
+    displayName: 代码
+  paper_type:
+    displayName: 类型
+  tags:
+    displayName: 标签
+  read_month:
+    displayName: 阅读月份
+  month_status:
+    displayName: 本月状态
+views:
+  - type: table
+    name: 全部论文
+    groupBy:
+      property: read_month
+      direction: DESC
+    order:
+      - title
+      - year
+      - paper_type
+      - venue
+      - arxiv
+      - code
+      - tags
+    sort:
+      - property: year
+        direction: DESC
+      - property: file.name
+        direction: ASC
+  - type: table
+    name: "本月在读"
+    filters:
+      and:
+        - 'file.hasProperty("read_month")'
+        - 'note.read_month == today().date().format("YYYY-MM")'
+        - 'note.month_status == "reading"'
+    order:
+      - file.name
