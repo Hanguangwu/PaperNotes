@@ -26,5 +26,3 @@ Thumbs.db
 .env
 .env.local
 
-# 内容目录（需人工校对后再提交）
-content/
